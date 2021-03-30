@@ -1,0 +1,53 @@
+{% if product %}
+    <small>
+        <nav aria-label="breadcrumb" class="product-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'products' %}">All Products</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'products' %}?category={{ product.category.name }}">{{product.category.friendly_name}}</a></li>
+                {% if product.subcategory %}
+                <li class="breadcrumb-item"><a href="{% url 'products' %}?subcategory={{ product.subcategory.name }}">{{product.subcategory.friendly_name}}</a></li>
+                {% endif %}
+                <li class="breadcrumb-item">{{product.name}}</li>
+            </ol>
+        </nav>
+    </small>
+{% endif %}
+
+{% if current_categories %}
+    <small>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            {% for category in current_categories %}
+                {% if current_categories|length == 1 %}
+            <li class="breadcrumb-item"><a href="{% url 'products' %}">All Products</a></li> 
+            <li class="breadcrumb-item"><a href="{% url 'products' %}?category={{ category.name }}">{{category.friendly_name}}</a></li>
+                {% endif %}
+            {% endfor %}
+            </ol>
+        </nav>
+    </small>
+{% else %}
+  
+  {% if not product %}
+    <small>
+        <nav>
+            <ol class="breadcrumb">
+                 
+                <li class="breadcrumb-item"><a href="{% url 'products' %}">All Products</a></li>
+               
+                {% for subcategory.category.name in current_subcategories %}
+                <li class="breadcrumb-item"><a href="{% url 'products' %}?category={{ subcategory.category.name }}">{{ subcategory.category.friendly_name}}</a></li>    
+                {% endfor %}
+               
+            {% if current_subcategories %}
+                {% for subcategory in current_subcategories %}
+                    {% if current_subcategories|length == 1 %}
+                    <li class="breadcrumb-item" aria-current="page">{{subcategory.friendly_name}}</li>
+                    {% endif %}
+                {% endfor %}
+            </ol>       
+        </nav>
+    </small>
+        {% endif %}
+    {% endif %}
+{% endif %}
