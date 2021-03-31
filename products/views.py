@@ -6,6 +6,10 @@ from .models import Product, Category, Subcategory
 import random
 
 
+subcategory = Subcategory.objects.all()
+category = Category.objects.all()
+
+
 def all_products(request):
     """ A view to show all products, including sorting and searching """
 
@@ -43,7 +47,13 @@ def all_products(request):
             subcategories = request.GET['subcategory'].split(',')
             products = products.filter(subcategory__name__in=subcategories)
             subcategories = Subcategory.objects.filter(name__in=subcategories)
-
+            global category
+            global subcategory
+            category = Category.objects.filter(name__in=subcategory)
+            subcategory = Subcategory.objects.filter(name__in=category)
+            # category = Category.subcategory_set(name__in=subcategories)
+            print(category)
+            print(subcategories)
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
@@ -63,6 +73,8 @@ def all_products(request):
         'current_categories': categories,
         'current_subcategories': subcategories,
         'current_sorting': current_sorting,
+        'category': category,
+        'subcategory': subcategory,
     }
 
     return render(request, 'products/products.html', context)
