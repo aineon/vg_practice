@@ -1,5 +1,5 @@
 let stripe_public_key = $('#id_stripe_public_key').text().slice(1, -1);
-let client_secret = $('#id_client_secret').text().slice(1, -1);
+let clientSecret = $('#id_client_secret').text().slice(1, -1);
 let stripe = Stripe(stripe_public_key);
 let elements = stripe.elements();
 let style = {
@@ -9,7 +9,7 @@ let style = {
         fontSmoothing: 'antialiased',
         fontSize: '16px',
         '::placeholder': {
-            color: '#ee6aa7;'
+            color: '#ee6aa7'
         }
     },
     invalid: {

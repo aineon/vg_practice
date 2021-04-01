@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+{% endblock %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col bag-header">
+                <h2 class="text-pink font-weight-bold mb-4">Thank You! <i class="far fa-grin-hearts"></i></h2>
+                <hr>
+                <p>Please find the details of your order below.
+                    <br> Your order number is <strong>{{ order.order_number }}</strong>
+                    <br> A confirmation email will be sent to <strong>{{ order.email }}</strong>
+                    <br> Have a great day! <i class="far fa-grin-alt"></i>
+                </p>
+            </div>
+        </div>
+
+      <div class="row">
+            <div class="col-12 col-lg-7"></div>
+        </div>
+        <div class="row">
+			<div class="col-12 col-lg-7 text-right">
+				<a href="{% url 'products' %}" class="btn shop-btn rounded-0 my-2">
+					<span class="icon mr-2">
+						<i class="fas fa-gifts"></i>
+					</span>
+					<span class="text-uppercase">Find your next love!</span>
+				</a>
+			</div>
+		</div>
+    </div>
+       
+{% endblock %}
