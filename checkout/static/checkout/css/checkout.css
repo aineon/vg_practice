@@ -2,7 +2,7 @@
 .stripe-style-input {
   box-sizing: border-box;
   height: 40px;
-  padding: 10px 12px;
+  padding: 9px 12px;
   border: 1px solid transparent;
   border-radius: 2px;
   background-color: white;
@@ -30,6 +30,18 @@
 #card-element  {
    /* border: 1px solid #ee6aa7; */
 }
+
+
+select option,
+#id_country {
+    color: #ee6aa7
+}
+
+select:invalid,
+select option[value=""] {
+    color: #aab7c4 !important;
+}
+
 
 .fieldset-label {
     position: relative;

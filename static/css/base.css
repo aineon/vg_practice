@@ -349,16 +349,15 @@ option {
 }
 
 option[selected],
-#id_product_size_c,
 #id_product_size {
      color: #ee6aa7;
 }
 
 #sort-selector,
-#id_product_size,
-#id_product_size_c { 
+#id_product_size { 
      font-weight: 700;
 }
+
 .qty-btn {
     background-color: #ee6aa7;
     color: black;
