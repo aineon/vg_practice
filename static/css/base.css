@@ -58,6 +58,7 @@ body {
   height: 100%;
 }
 
+
 /* Header */
 .logo {
     font-family: 'Sedgwick Ave Display', cursive;
@@ -527,7 +528,54 @@ footer {
     overflow-y: auto;
 }
 
-/* Media Queries */
+/* Allauth templates */
+.allauth-form-inner-content p {
+    margin-top: 1.5rem; /* mt-4 */
+    color: #4c4c4c;
+}
+
+.allauth-form-inner-content input {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background-color: white;
+  box-shadow: 1px 1px 3px 1px #ee6aa7;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.allauth-form-inner-content input:active,
+.allauth-form-inner-content input:focus {
+   box-shadow:2px 2px 3px 1px #85878a;
+   border: 1px solid black;
+   background-color: white;
+}
+
+.allauth-form-inner-content label:not([for='id_remember']) {
+    display: none;
+}
+
+.allauth-form-inner-content input[type='checkbox'] {
+    box-shadow: none;
+}
+
+.allauth-form-inner-content input::placeholder {
+    color: #ee6aa7
+}
+
+.form-link:hover {
+    font-weight: bold;
+    text-decoration: none;
+    color: #ee6aa7;
+}
+
+.allauth-logo {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+
+
+    /*Media Queries */
 
 
 @media only screen and (max-width: 664px) {
