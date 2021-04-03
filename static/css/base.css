@@ -530,7 +530,7 @@ footer {
 
 /* Allauth templates */
 .allauth-form-inner-content p {
-    margin-top: 1.5rem; /* mt-4 */
+    margin-top: 1.5rem; 
     color: #4c4c4c;
 }
 
@@ -558,8 +558,24 @@ footer {
     box-shadow: none;
 }
 
+.allauth-form-inner-content input[type='submit'] {
+    background-color: #ee6aa7;
+    color: #000;
+    border: 2px solid #000;
+    box-shadow: 2px 2px 3px black; 
+}
+
+.allauth-form-inner-content input[type='submit']:hover {
+    background-color: black;
+    color: #ee6aa7; 
+}
+
 .allauth-form-inner-content input::placeholder {
     color: #ee6aa7
+}
+
+.form-link {
+    color: #ee6aa7;
 }
 
 .form-link:hover {
@@ -574,8 +590,7 @@ footer {
 }
 
 
-
-    /*Media Queries */
+/*Media Queries */
 
 
 @media only screen and (max-width: 664px) {
