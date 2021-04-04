@@ -20,6 +20,9 @@
             <div class="col text-center mt-3">
                 {% for category in current_categories %}
                     {% if current_categories|length > 1 %}
+                     {% if forloop.first %}
+                        <h2 class="logo mb-3">Clothing</h2>
+                    {% endif %}
                         <a class="badge text-decoration-none mb-2" href="{% url 'products' %}?category={{category.name }}">
                             <span class="p-2 mt-2 mb-2 category-badge rounded-0 text-center">{{category.friendly_name }}</span>
                         </a> 
@@ -37,18 +40,17 @@
                     {% if current_subcategories|length == 1 %}
                         <h2 class="logo mt-2">{{subcategory.friendly_name}}</h2>
                     {% endif %}
-
-                    <!-----FIX THIS!!!!!!-->
-                    {% if current_subcategories|length > 1 and subcategory.name == 'bracelets' and subcategory.name == 'earrings' and subcategory.name == 'necklaces' %}
-                    <!--    <h2 class="logo mt-2">Jewellery</h2>  --> 
+               
+                    {% if subcategory.category.name == 'accessories' and current_subcategories|length == 3 %}
+                        {% if forloop.first %}
+                            <h2 class="logo mb-3">Jewellery</h2> 
+                        {% endif %}
                      <a class="badge text-decoration-none mb-2 mt-2" href="{% url 'products' %}?subcategory={{subcategory.name }}">
                             <span class="p-2 mt-2 category-badge rounded-0 text-center">{{ subcategory.friendly_name }}</span>
-                        </a>
+                        </a>   
                     {% endif %}
-                    <!------------------->
-                    
                 {% endfor %}
-                        
+                          
                 {% if current_categories|length == 0 and current_subcategories|length == 0 %}
                     <h2 class="logo mt-2">All Products</h2>
                          <a class="badge text-decoration-none mb-2 mt-2" href="{% url 'products' %}?category=dresses,bottoms,tops_ts,outerwear">

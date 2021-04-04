@@ -326,7 +326,7 @@ input[name='q']::placeholder {
     background-color: #c7cbcf;
     border: 2px solid #ee6aa7;
     margin-right: 7px;
-    font-size: 1.5rem;
+    font-size: 1rem;
     box-shadow: 3px 3px 5px #85878a;   
 }
 
