@@ -24,3 +24,8 @@
 #id_default_country {
     color: #ee6aa7;
 }
+
+.order-history {
+    max-height: 450px;
+    overflow-y: auto;
+}
