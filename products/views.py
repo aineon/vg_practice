@@ -6,8 +6,8 @@ from .models import Product, Category, Subcategory
 import random
 
 
-subcategory = Subcategory.objects.all()
-category = Category.objects.all()
+# subcategory = Subcategory.objects.all()
+# category = Category.objects.all()
 
 
 def all_products(request):
@@ -49,11 +49,10 @@ def all_products(request):
             subcategories = Subcategory.objects.filter(name__in=subcategories)
             global category
             global subcategory
-            category = Category.objects.filter(name__in=subcategory)
-            subcategory = Subcategory.objects.filter(name__in=category)
+            # category = Category.objects.filter(name__in=subcategory)
+            # subcategory = Subcategory.objects.filter(name__in=category)
             # category = Category.subcategory_set(name__in=subcategories)
-            print(category)
-            print(subcategories)
+
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
@@ -73,8 +72,8 @@ def all_products(request):
         'current_categories': categories,
         'current_subcategories': subcategories,
         'current_sorting': current_sorting,
-        'category': category,
-        'subcategory': subcategory,
+        # 'category': category,
+        # 'subcategory': subcategory,
     }
 
     return render(request, 'products/products.html', context)

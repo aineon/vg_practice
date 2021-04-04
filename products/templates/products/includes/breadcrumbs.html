@@ -3,9 +3,17 @@
         <nav aria-label="breadcrumb" class="product-breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{% url 'products' %}">All Products</a></li>
+                {% if product.category.name == 'dresses' or product.category.name == 'bottoms' or product.category.name == 'tops_ts' or product.category.name == 'outerwear'%}
+                <li class="breadcrumb-item"><a href="{% url 'products' %}?category=dresses,bottoms,tops_ts,outerwear">All Clothing</a></li> 
+                {% endif %}
                 <li class="breadcrumb-item"><a href="{% url 'products' %}?category={{ product.category.name }}">{{product.category.friendly_name}}</a></li>
                 {% if product.subcategory %}
+                {% if product.subcategory.name == 'earrings' or product.subcategory.name == 'bracelets' or product.subcategory.name == 'necklaces' %}  
+                <li class="breadcrumb-item"><a href="{% url 'products' %}?subcategory=earrings,necklaces,bracelets">Jewellery</a></li> 
                 <li class="breadcrumb-item"><a href="{% url 'products' %}?subcategory={{ product.subcategory.name }}">{{product.subcategory.friendly_name}}</a></li>
+                {% else %}
+                <li class="breadcrumb-item"><a href="{% url 'products' %}?subcategory={{ product.subcategory.name }}">{{product.subcategory.friendly_name}}</a></li>
+                {% endif %}
                 {% endif %}
                 <li class="breadcrumb-item">{{product.name}}</li>
             </ol>
@@ -18,39 +26,52 @@
     <small>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-            {% for category in current_categories %}
-                {% if current_categories|length == 1 %}
-            <li class="breadcrumb-item"><a href="{% url 'products' %}">All Products</a></li> 
-            <li class="breadcrumb-item"><a href="{% url 'products' %}?category={{ category.name }}">{{category.friendly_name}}</a></li>
-                {% endif %}
-            {% endfor %}
+        {% for category in current_categories|slice:":1" %} 
+                <li class="breadcrumb-item"><a href="{% url 'products' %}">All Products</a></li> 
+            
+            {% if current_categories|length > 1 %}
+                <li class="breadcrumb-item"><a href="{% url 'products' %}?category=dresses,bottoms,tops_ts,outerwear">All Clothing</a></li> 
+            {% elif current_categories|length == 1 and category.name == 'dresses' or category.name == 'bottoms' or category.name == 'tops_ts' or category.name == 'outerwear' %}
+                <li class="breadcrumb-item"><a href="{% url 'products' %}?category=dresses,bottoms,tops_ts,outerwear">All Clothing</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'products' %}?category={{category.name}}">{{category.friendly_name}}</a></li>   
+            {% elif current_categories|length == 1 and category.name != 'dresses' or category.name != 'bottoms' or category.name != 'tops_ts' or category.name != 'outwear'%}
+                <li class="breadcrumb-item"><a href="{% url 'products' %}?category={{category.name}}">{{category.friendly_name}}</a></li>
+            {% endif %}
+        {% endfor %}
+              
             </ol>
         </nav>
     </small>
+
 {% else %}
-  
-  
+
     <small>
         <nav>
             <ol class="breadcrumb">
             {% if not product %}
                 <li class="breadcrumb-item"><a href="{% url 'products' %}">All Products</a></li>
-                 
-            
-                {% for category in category %}
-                {% if category.id in subcategory %}
-                <li class="breadcrumb-item"><a href="{% url 'products' %}?category={{ category.name }}">{{ category.friendly_name}}</a></li>    
-               {% endif %}
-                {% endfor %}
-            {% if current_subcategories %}
-                {% for subcategory in current_subcategories %}
-                    {% if current_subcategories|length == 1 %}
-                    <li class="breadcrumb-item" aria-current="page">{{subcategory.friendly_name}}</li>
-                    {% endif %}
-                {% endfor %}
+                {% if current_subcategories %}
+                    {% for subcategory in current_subcategories|slice:":1" %}
+                        {% if subcategory.category.name == 'dresses' or subcategory.category.name == 'tops_ts' or subcategory.category.name == 'bottoms' %}  
+                            <li class="breadcrumb-item"><a href="{% url 'products' %}?category=dresses,bottoms,tops_ts,outerwear">All Clothing</a></li>
+                        {% endif %}
+                            <li class="breadcrumb-item"><a href="{% url 'products' %}?category={{subcategory.category.name}}">{{subcategory.category.friendly_name}}</a></li>
+                     
+                        {% if current_subcategories|length > 1 and subcategory.category.name == 'accessories'  %}  
+                            <li class="breadcrumb-item"><a href="{% url 'products' %}?subcategory=earrings,necklaces,bracelets">Jewellery</a></li> 
+                        {% endif %}
+                        
+                        {% if current_subcategories|length == 1 %}
+                        {% if subcategory.name == 'earrings' or subcategory.name == 'bracelets' or subcategory.name == 'necklaces' %}  
+                            <li class="breadcrumb-item"><a href="{% url 'products' %}?subcategory=earrings,necklaces,bracelets">Jewellery</a></li> 
+                            <li class="breadcrumb-item" aria-current="page">{{subcategory.friendly_name}}</li>
+                         {% else %}
+                            <li class="breadcrumb-item" aria-current="page">{{subcategory.friendly_name}}</li>
+                        {% endif %}
+                        {% endif %} 
+                    {% endfor %}
+                {% endif %}
             {% endif %}
-            {% endif %}
-
             </ol>       
         </nav>
     </small>

@@ -333,7 +333,6 @@ input[name='q']::placeholder {
 a.badge > span.category-badge:hover {
     background-color: #ee6aa7;
     color: #c7cbcf;
-    border: 2px solid #c7cbcf;
 }
 
 a.back-link {
