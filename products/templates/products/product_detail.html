@@ -37,10 +37,20 @@
                             </a>
                         {% if product.subcategory %}   
                             <a class="text-muted" href="{% url 'products' %}?subcategory={{ product.subcategory.name }}">
-                                <i class="fas fa-tag detail-icon mr-1 mt-1 mb-0"></i>{{ product.subcategory.friendly_name }}
+                                <i class="fas fa-tag detail-icon mr-1 ml-1 mt-1 mb-0"></i>{{ product.subcategory.friendly_name }}
                             </a>
                         </p>
                         {% endif %}
+                    {% endif %}
+
+                    {% if request.user.is_superuser %}
+                    <div class="text-center mt-1">
+                        <small class="ml-3">
+                            <a class="text-pink form-link" href="{% url 'edit_product' product.id %}">Edit</a>
+                            <span class="text-black">|</span> 
+                            <a class="delete-link" href="{% url 'delete_product' product.id %}">Delete</a>
+                        </small>
+                    </div>
                     {% endif %}
 
                     <hr class="detail-hr">

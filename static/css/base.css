@@ -441,6 +441,16 @@ a.remove-item:hover {
     color: #ee6aa7; 
 }
 
+.delete-link {
+    color: #85878a;
+}
+
+.delete-link:hover {
+    color: #85878a;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 footer {
     bottom: 0;
     left: 0;
@@ -459,6 +469,8 @@ footer {
     box-shadow: 1px 1px 3px 1px #ee6aa7;
     border: 1px solid transparent;    
 }
+
+
 
 /* Toasts */
 
