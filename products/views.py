@@ -8,6 +8,7 @@ from .forms import ProductForm
 
 import random
 
+
 def all_products(request):
     """ A view to show all products, including sorting and searching """
 
@@ -45,11 +46,6 @@ def all_products(request):
             subcategories = request.GET['subcategory'].split(',')
             products = products.filter(subcategory__name__in=subcategories)
             subcategories = Subcategory.objects.filter(name__in=subcategories)
-            global category
-            global subcategory
-            # category = Category.objects.filter(name__in=subcategory)
-            # subcategory = Subcategory.objects.filter(name__in=category)
-            # category = Category.subcategory_set(name__in=subcategories)
 
         if 'q' in request.GET:
             query = request.GET['q']
@@ -95,7 +91,20 @@ def product_detail(request, product_id):
 
 def add_product(request):
     """ Add a product to the store """
-    form = ProductForm()
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully added product!')
+            return redirect(reverse('add_product'))
+        else:
+            messages.error(request,
+                           'Failed to add product.'
+                           'Please ensure the form is valid.')
+    else:
+        form = ProductForm()
+
     template = 'products/add_product.html'
     context = {
         'form': form,

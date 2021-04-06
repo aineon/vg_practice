@@ -455,6 +455,11 @@ footer {
     padding-top: 2rem;
 }
 
+.input-shadow {
+    box-shadow: 1px 1px 3px 1px #ee6aa7;
+    border: 1px solid transparent;    
+}
+
 /* Toasts */
 
 .message-container {
