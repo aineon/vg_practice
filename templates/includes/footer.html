@@ -1,0 +1,55 @@
+<footer class="container-fluid mt-2">
+    <small>
+        <div class="row">
+            <div class="col-6 text-center">
+                <h4 class="text-pink font-weight-bold text-center mt-2">Newsletter</h4>
+                <hr class="w-75 grey-divider">
+                <p class="text-pink text-center">
+                    Sign up to our fortnightly newsletter to get the exclusive on new arrivals, 
+                    special offers, new collaborations and all things fashion directly to your inbox!
+                </p>
+                <form method="POST" action="{% url 'newsletter_signup' %}" id="subscription_form">
+                    <div class="form-group">
+                        {% csrf_token %}
+                        {{ news_signup_form|crispy }}   
+                        <small class="text-pink text-center">We'll never share your email address with anybody else.</small> 
+                    </div>
+                    
+                    <button type="submit" class="btn btn-sm shop-btn rounded-0 text-center mb-2">Sign Up</button>  
+                </form>
+            </div>
+        
+    
+            <div class="col-6 text-center">
+                <h5 class="text-pink font-weight-bold text-center mt-2">Social Media</h5>
+                <hr class="w-75 pink-divider">
+                <p class="text-pink text-center">
+                    Follow us on social media for the latest news, collections and collaborations.
+                </p>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="" target="_blank" aria-label="Like us on Facebook">
+                            <div class="footer-icon">  <i class="fab fa-facebook-f fa-lg pink-icon p-2"></i></div> 
+                                <span class="sr-only">Facebook</span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="" target="_blank" aria-label="Follow us on Instagram">
+                                <i class="fab fa-instagram fa-lg pink-icon"></i>
+                                <span class="sr-only">Instagram</span>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="" target="_blank" aria-label="Follow us on Twitter">
+                                <i class="fab fa-twitter fa-lg pink-icon"></i>
+                                <span class="sr-only">Twitter</span>
+                            </a>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+        <div class="row footer-btm pt-1">
+            <p class="text-pink small text-center"> copyright info</p>
+        </div>
+    </small>
+</footer>

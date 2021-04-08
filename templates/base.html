@@ -64,12 +64,13 @@
             </div>
 
             <div class="col-12 col-lg-3 my-auto ">
-                <ul class="list-inline list-unstyled text-center text-lg-right my-0">
+                <ul class="list-inline list-unstyled float-left text-lg-right my-0">
+                   
                     <li class="list-inline-item dropdown">
                         <a class="nav-link icon-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="text-center">
                                 <div><i class="fas fa-user pink-icon"></i></div>
-                                 <p class="my-0">My Account</p>
+                                 <p class="my-0 small">My Account</p>
                             </div>
                         </a>
                         <div class="dropdown-menu border-0" aria-labelledby="user-options">
@@ -90,13 +91,21 @@
                             <div class="text-center">
                                 <div><i class="fas fa-shopping-bag pink-icon"></i></div>
                             </div>
-                            <p class="my-0">
+                            <p class="my-0 small">
                                 {% if grand_total %}
                                     €{{ grand_total|floatformat:2 }}
                                 {% else %}
                                     €0.00
                                 {% endif %}
                             </p>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="nav-link icon-link" href="{% url 'contact' %}">
+                            <div class="text-center">
+                                <div><i class="fas fa-envelope pink-icon"></i></div>
+                                <p class="my-0 small">Contact</p>
+                            </div>
                         </a>
                     </li>
                 </ul>
@@ -143,7 +152,12 @@
 
     {% block content %}
     {% endblock %}
-
+    
+    {% include 'includes/scroll_to_top.html' %}
+    {% url 'home' as home %}
+    {% if  request.get_full_path != home %}
+    {% include 'includes/footer.html' %}
+    {% endif %}
     {% block postloadjs %}
     
         <script type="text/javascript">
@@ -151,13 +165,7 @@
         </script>
 
     {% endblock %}
-<!--
-    <footer>
-    <div class="row">
-        <div class="col">SOCIAL ICONS GO HERE</div>
-    </div>
-</footer>
--->
+
 
   
     <!-- Option 2: Separate Popper and Bootstrap JS -->

@@ -7,6 +7,8 @@ from django.db.models.functions import Lower
 from .models import Product, Category, Subcategory
 from .forms import ProductForm
 
+from contact.forms import SubscriptionForm
+
 import random
 
 
@@ -60,6 +62,7 @@ def all_products(request):
             products = products.filter(queries)
 
     current_sorting = f'{sort}_{direction}'
+    news_signup_form = SubscriptionForm(request.POST or None)
 
     context = {
         'products': products,
@@ -67,6 +70,7 @@ def all_products(request):
         'current_categories': categories,
         'current_subcategories': subcategories,
         'current_sorting': current_sorting,
+        'news_signup_form': news_signup_form,
     }
 
     return render(request, 'products/products.html', context)
@@ -80,9 +84,12 @@ def product_detail(request, product_id):
     all_products = list(Product.objects.all())
     rand_products = random.sample(all_products, 7)
 
+    news_signup_form = SubscriptionForm(request.POST or None)
+
     context = {
         'product': product,
         'rand_products': rand_products,
+        'news_signup_form': news_signup_form,
     }
 
     return render(request, 'products/product_detail.html', context)
@@ -107,10 +114,12 @@ def add_product(request):
                            'Please ensure the form is valid.')
     else:
         form = ProductForm()
-
+    news_signup_form = SubscriptionForm(request.POST or None)
     template = 'products/add_product.html'
+    
     context = {
         'form': form,
+        'news_signup_form': news_signup_form
     }
 
     return render(request, template, context)
