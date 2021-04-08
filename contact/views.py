@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from .models import NewsletterSubscription
@@ -20,21 +20,43 @@ def contact(request):
                            ' Please ensure the form is valid.')
 
     form = ContactForm()
-    news_signup_form = SubscriptionForm(request.POST or None)
 
     context = {
         'form': form,
-        'news_signup_form': news_signup_form,
     }
 
     return render(request, template, context)
 
+"""
+def newsletter_signup(request):
+
+    news_sub_form = SubscriptionForm()
+    news_sub_redirect = request.POST.get('news_sub_redirect')
+
+    if request.method == 'POST':
+        news_sub_form = SubscriptionForm(request.POST)
+        if (NewsletterSubscription.objects.filter(
+                email=request.POST.get('email')).exists()):
+            messages.error(request, 'Sorry! This email address \
+                          is already registered for our Newsletter.')
+        else:
+            if news_sub_form.is_valid():
+                news_sub_form.save()
+            messages.success(request, "Congratulations! "
+                             " You've been added to our mailing list!")
+
+    news_sub_form = SubscriptionForm()
+
+    return redirect(news_sub_redirect)
+"""
+
 
 def newsletter_signup(request):
-    news_signup_form = SubscriptionForm(request.POST or None)
+    news_sub_form = SubscriptionForm(request.POST or None)
+    news_sub_redirect = request.POST.get('news_sub_redirect')
 
-    if news_signup_form.is_valid():
-        instance = news_signup_form.save(commit=False)
+    if news_sub_form.is_valid():
+        instance = news_sub_form.save(commit=False)
         if (NewsletterSubscription.objects.filter(
                 email=instance.email).exists()):
             messages.error(request, 'Sorry! This email address \
@@ -43,10 +65,4 @@ def newsletter_signup(request):
             instance.save()
             messages.success(request, "Congratulations! "
                              " You've been added to our mailing list!")
-    
-    print(news_signup_form)
-    context = {
-        'news_signup_form': news_signup_form,
-    }
-
-    return render(request, context)
+    return redirect(news_sub_redirect)
