@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mb-2">
+        <div class="row">
+            <div class="col bag-header">
+                <h2 class="logo text-center mb-4">Blog</h2>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container-blog">
+                {% for post in posts %}
+
+                <div class="row">
+                        <div class="col-12 col-md-4">
+                            <div class="blog-image pl-3">
+                                {% if post.image %}
+                                    <img class="img-fluid" src="{{ post.image.url }}" alt="{{ post.title }}">
+                                {% endif %}
+                                </div>
+                            </div>
+       
+                            <div class="col-12 col-md-8 text-center">
+                                <div>
+                                    <h2 class="text-pink font-weight-bold">{{ post.title }}</h2>
+                                    {% if request.user.is_superuser %}
+                                    <small class="ml-3">
+                                        <a class="text-pink form-link" href="">Edit</a>
+                                        <span class="text-black">| </span> 
+                                        <a class="delete-link" href="">Delete</a>
+                                    </small>
+                                {% endif %}
+                                    <p class="mb-1 float-left">
+                                        {% if post.author %}
+                                            {{ post.author }}  
+                                        {% endif %}
+                                    <span>  {{post.date_created|date:'j F, Y' }}</span> </p>
+                                   
+                                </div>
+                                <hr class="pink-divider w-25">
+                                <div>
+                                    <p class="mb-1 text-center">{{ post.intro }}</p>
+                                    <a href="{% url 'post_detail' post.id %}" class="btn shop-btn rounded float-right">Read More...</a>
+                          
+                                    {% if post.source %}
+                                    <small class="text-muted float-left mt-3"><em>credit: {{post.source}} <a href="{{post.original_url}">original post</a></em></small>
+                                    {% endif %}
+                                </div>
+                
+                                 </div>
+                            </div>
+                            <hr class="pink-divider w-75">
+                            {% endfor %}
+                        </div>
+                    </div>
+    </div>
+
+{% endblock %}

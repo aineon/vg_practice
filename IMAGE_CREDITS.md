@@ -12,4 +12,6 @@ bg-11 - Photo by <a href="https://unsplash.com/@kknrynsk_jp?utm_source=unsplash&
 bg-12 - Photo by Abir Hasan from Pexels
 bg13 - Image by <a href="https://pixabay.com/users/luisfilipeeua-889012/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1762450">Luis Filipe faria Lipe</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1762450">Pixabay</a>
 bg-14 - Photo by <a href="https://unsplash.com/@toolsformotivation?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Tools For Motivation</a> on <a href="https://unsplash.com/s/photos/street-art?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-  
+
+
+blog1 - Image by <a href="https://pixabay.com/users/stocksnap-894430/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2561844">StockSnap</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2561844">Pixabay</a>

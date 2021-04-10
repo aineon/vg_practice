@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'checkout',
     'profiles',
     'contact',
+    'blog',
     'crispy_forms',
 ]
 
@@ -82,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'bag.contexts.bag_contents',
                 'contact.contexts.newsletter_subscription_form',
+                'products.contexts.rand_product_list',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',

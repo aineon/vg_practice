@@ -9,6 +9,8 @@ body {
     height: 100%;
 }
 
+.home-container {}
+
 .header-container {
     padding-top: 164px;
 }
@@ -144,6 +146,7 @@ input[name='q']::placeholder {
 
 
 /* Home Page */
+
 .display-3 {
     font-weight: 500;
     font-family: 'Permanent Marker', cursive;
@@ -469,19 +472,15 @@ footer {
     height: 100%;
 	width: 100%;
 	background: rgba(0,0,0,0.4);
-	z-index: -1;
-   
+	z-index: -1; 
 }
 
 .home-footer {
     color:#dee2e6;
-    bottom: 0;
-    left: 0;
 }
 
 .footer-btm{
     background-color: #000;
-
 }
 
 .bag-header {

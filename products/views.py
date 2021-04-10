@@ -8,9 +8,6 @@ from .models import Product, Category, Subcategory
 from .forms import ProductForm
 
 
-import random
-
-
 def all_products(request):
     """ A view to show all products, including sorting and searching """
 
@@ -77,16 +74,22 @@ def product_detail(request, product_id):
     """A view to show individual product details"""
 
     product = get_object_or_404(Product, pk=product_id)
-    """Generate list of random products"""
-    all_products = list(Product.objects.all())
-    rand_products = random.sample(all_products, 7)
 
     context = {
         'product': product,
-        'rand_products': rand_products,
     }
 
     return render(request, 'products/product_detail.html', context)
+
+
+# def favourite_product(request, product_id):
+#     product = get_object_or_404(Product, pk=product_id)
+#     if product.favourite.objects.filter(id=request.user.id).exists():
+#         product.favourite.remove(request.user)
+#     else:
+#         product.favourite.add(request.user)
+
+#     return redirect(reverse('product_detail', args=[product.id]))
 
 
 @login_required
@@ -110,7 +113,7 @@ def add_product(request):
         form = ProductForm()
 
     template = 'products/add_product.html'
-    
+
     context = {
         'form': form,
     }
