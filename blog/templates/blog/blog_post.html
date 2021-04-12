@@ -15,21 +15,7 @@
     <div class="container-blog">
         <div class="row bag-header">
             <div class="col-10 offset-1 text-center">
-                <h2 class="">{{ post.title }}</h2>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-10 offset-1 mt-4">
-                <div class="blog-image h-50">
-                    {% if post.image %}
-                        <img class="img-fluid" src="{{ post.image.url }}" alt="{{ post.title }}">
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-10 offset-1">
+                <h2 class="text-pink font-weight-bold">{{ post.title }}</h2>
                 <p class="mb-1 float-left">
                     {% if post.author %}
                         {{ post.author }}  
@@ -37,17 +23,27 @@
                 <span>  {{post.date_created|date:'j F, Y' }}</span> </p>
                 {% if request.user.is_superuser %}
                 <small class="ml-3 float-right">
-                    <a class="text-pink form-link" href="">Edit</a>
+                    <a class="text-pink form-link" href="{% url 'edit_post' post.id %}">Edit</a>
                     <span class="text-black">| </span> 
-                    <a class="delete-link" href="">Delete</a>
+                    <a class="delete-link" href="{% url 'delete_post' post.id %}">Delete</a>
                 </small>
             {% endif %}
             </div>
         </div>
-        <hr class="pink-divider w-75">
+        <div class="row">
+            <div class="col-10 offset-1 mt-4 ">
+                <div class="blog-image mx-auto">
+                    {% if post.image %}
+                        <img class="img-fluid" src="{{ post.image.url }}" alt="{{ post.title }}">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+       
 
         <div class="row">
-            <div class="col-10 offset-1">
+            <div class="col-10 offset-1 mt-3">
                 <p class="mb-2 float-left">{{ post.intro }}</p>
                 <p class="mb-4 float-left">{{post.section_one}}</p>
 

@@ -1,0 +1,1 @@
+from products.widgets import CustomClearableFileInput

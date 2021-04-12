@@ -18,11 +18,45 @@
                 <hr>
             </div>
         </div>
+        
+        <div class="row">
+            <div class="col-10 offset-1">
+                <p>Here at <span class="blog-logo">The Velvet Goldmine</span> we are passionate about all things fashion but there are 2 things we are
+                particularly passionate about - promoting Irish designers and Sustainable Fashion. We are all aware of the negative impact the fashion industry, and especially
+                <em>'Fast Fashion'</em> has on the environment.
+                <br> With that in mind we are trying to do our bit. The products we choose are of the highest quality to ensure longevity and our choices are based on style not trend. 
+                 We aim to choose statement pieces that you'll want to wear over and over again regardless of what's <em>on trend</em> and that you won't find on the highstreet.  
+                 At the moment, at least 50% of our stock is made from sustainable fabrics, a figure we aim to continually increase as their use becomes more wide spread.
+                 All our packaging is made from 100% recycled materials and is itself 100% recyclable. It's not much but it's a start!!
+                <br> Our second passion project is promoting Irish Desginers. There are some amazing Irish designers out there but sometimes 
+                 they can be hard to find! So if you're interested in Sustainable Fashion or discovering
+                 new Irish Designers check out our blog below <i class="fas fa-heart text-pink"></i>
+                </p>
+            </div>
+        </div>
+        <hr class="w-75">
 
         <div class="row">
             <div class="container-blog">
                 {% for post in posts %}
-
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="text-pink font-weight-bold text-center">{{ post.title }}</h2>
+                                {% if request.user.is_superuser %}
+                                    <small class="ml-3 float-right">
+                                        <a class="text-pink form-link" href="{% url 'edit_post' post.id %}">Edit</a>
+                                        <span class="text-black">| </span> 
+                                        <a class="delete-link" href="{% url 'delete_post' post.id %}">Delete</a>
+                                    </small>
+                                {% endif %}
+                                    <p class="mb-1 float-left">
+                                        {% if post.author %}
+                                            {{ post.author }}  
+                                        {% endif %}
+                                    <span>  {{post.date_created|date:'j F, Y' }}</span> </p>
+                                   
+                    </div>
+                </div>
                 <div class="row">
                         <div class="col-12 col-md-4">
                             <div class="blog-image pl-3">
@@ -34,24 +68,11 @@
        
                             <div class="col-12 col-md-8 text-center">
                                 <div>
-                                    <h2 class="text-pink font-weight-bold">{{ post.title }}</h2>
-                                    {% if request.user.is_superuser %}
-                                    <small class="ml-3">
-                                        <a class="text-pink form-link" href="">Edit</a>
-                                        <span class="text-black">| </span> 
-                                        <a class="delete-link" href="">Delete</a>
-                                    </small>
-                                {% endif %}
-                                    <p class="mb-1 float-left">
-                                        {% if post.author %}
-                                            {{ post.author }}  
-                                        {% endif %}
-                                    <span>  {{post.date_created|date:'j F, Y' }}</span> </p>
-                                   
+                                    
                                 </div>
-                                <hr class="pink-divider w-25">
+                           
                                 <div>
-                                    <p class="mb-1 text-center">{{ post.intro }}</p>
+                                    <p class="mb-1 float-left">{{ post.intro }}</p>
                                     <a href="{% url 'post_detail' post.id %}" class="btn shop-btn rounded float-right">Read More...</a>
                           
                                     {% if post.source %}

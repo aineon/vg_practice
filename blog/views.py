@@ -53,3 +53,44 @@ def add_post(request):
     }
 
     return render(request, template, context)
+
+
+def edit_post(request, post_id):
+    """ Add a post to the blog """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    post = get_object_or_404(BlogPost, pk=post_id)
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Successfully updated {post.title}!')
+            return redirect(reverse('post_detail', args=[post.id]))
+        else:
+            messages.error(request, f'Failed to update {post.title}.\
+                                     Please ensure the form is valid.')
+    else:
+        form = BlogForm(instance=post)
+        messages.info(request, f'You are editing {post.title}')
+
+    template = 'blog/edit_blogpost.html'
+    context = {
+        'form': form,
+        'post': post,
+    }
+
+    return render(request, template, context)
+
+
+def delete_post(request, post_id):
+    """ Delete a product from the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    post = get_object_or_404(BlogPost, pk=post_id)
+    post.delete()
+    messages.success(request, f'{post.title} deleted!')
+    return redirect(reverse('all_posts'))

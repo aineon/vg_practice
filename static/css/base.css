@@ -524,7 +524,10 @@ footer {
     border-radius: 0;
 }
 
-
+.blog-image {
+    height: 50%;
+    width: 75%;
+}
 /* Toasts */
 
 .message-container {
